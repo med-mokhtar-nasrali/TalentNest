@@ -1,7 +1,9 @@
 from flask_app import app
 from flask_app.models.user_model import User
+from flask_app.models.freelancer_model import Freelancer
+from flask_app.models.recruiter_model import Recruiter
 from flask import render_template,session,redirect,flash,request
-from flask_bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt # type: ignore
 bcrypt = Bcrypt(app)
 
 
@@ -26,7 +28,11 @@ def register():
         }
         user_id = User.register(data)
         session["user_id"] = user_id
-        return redirect("/home")
+        print (request.form["account_type"])
+        if request.form["account_type"]=='1':
+            return redirect('/freelancer_form')
+        if request.form["account_type"]=='0':
+            return redirect('/recruiter_form')
     else:
         return redirect("/registration")
     
@@ -47,6 +53,7 @@ def login():
     if not bcrypt.check_password_hash(user.password,request.form["password"]):
         flash("Invalid Email/Password","login")
         return redirect("/login")
+    session["email"] = user.email
     session["user_id"] = user.id
     return redirect("/home")
 
@@ -55,3 +62,49 @@ def login():
 def logout():
     session.clear()
     return redirect("/login")
+    return redirect("/")
+
+
+#Display route for freelancer form
+
+@app.route("/freelancer_form")
+def register_freelancer():
+    if "user_id" not in session:
+        return redirect('/login')
+    return render_template("more_freelancer_info.html")
+
+
+#Display route for recruiter form
+
+@app.route("/recruiter_form")
+def register_recruiter():
+    if "user_id" not in session:
+        return redirect('/login')
+    return render_template("more_recruiter_info.html")
+
+
+#Action Route for the freelancer profile form 
+
+
+@app.route('/add_info/freelancer',methods=["post"])
+def add_info():
+    data = {
+        **request.form,
+        'user_id':session['user_id']
+    }
+    freelancer_id=Freelancer.add_freelancer_info(data)
+    session['freelancer_id']=freelancer_id
+    return redirect('/home')
+
+
+#Action Route for the recruiter profile form 
+
+@app.route('/add_info',methods=["post"])
+def add_info_recruiter():
+    data = {
+        **request.form,
+        'user_id':session['user_id']
+    }
+    recruiter_id=Recruiter.add_recruiter_info(data)
+    session['recruiter_id']= recruiter_id
+    return redirect('/home')
