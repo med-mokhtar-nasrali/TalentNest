@@ -27,21 +27,19 @@ def register():
             "password":pw
         }
         user_id = User.register(data)
-        print (user_id)
         session["user_id"] = user_id
-        print (session["user_id"])
-        if request.form["account_type"]==1:
+        print (request.form["account_type"])
+        if request.form["account_type"]=='1':
             return redirect('/freelancer_form')
-        else:
+        if request.form["account_type"]=='0':
             return redirect('/recruiter_form')
-        
     else:
         return redirect("/registration")
     
 #Display Route For the login
 @app.route("/login")
 def login_page():
-    if "user_id" in session:
+    if "user_id"  in session:
         return redirect('/home')
     return render_template("/login_form.html")
     
@@ -63,6 +61,7 @@ def login():
 @app.route("/logout",methods = ["POST"])
 def logout():
     session.clear()
+    return redirect("/login")
     return redirect("/")
 
 
@@ -84,23 +83,28 @@ def register_recruiter():
     return render_template("more_recruiter_info.html")
 
 
+#Action Route for the freelancer profile form 
 
+
+@app.route('/add_info/freelancer',methods=["post"])
+def add_info():
+    data = {
+        **request.form,
+        'user_id':session['user_id']
+    }
+    freelancer_id=Freelancer.add_freelancer_info(data)
+    session['freelancer_id']=freelancer_id
+    return redirect('/home')
+
+
+#Action Route for the recruiter profile form 
 
 @app.route('/add_info',methods=["post"])
-def add_info():
-    result=User.get_account_type(session['email'])
-    if result==1 :
-        freelancer_id=User.get_by_id(session['email'])
-        data = {
-            **request.form,
-            'user_id':freelancer_id
-        }
-        Freelancer.add_freelancer_info(data)
-    else: 
-        recruiter_id=User.get_by_id(session['email'])
-        data = {
-            **request.form,
-            'user_id':recruiter_id
-        }
-        Recruiter.add_recruiter_info(data)
+def add_info_recruiter():
+    data = {
+        **request.form,
+        'user_id':session['user_id']
+    }
+    recruiter_id=Recruiter.add_recruiter_info(data)
+    session['recruiter_id']= recruiter_id
     return redirect('/home')
