@@ -33,7 +33,7 @@ def register():
 #Display Route For the login
 @app.route("/login")
 def login_page():
-    if "user_id" in session:
+    if "user_id"  in session:
         return redirect('/home')
     return render_template("/login_form.html")
     
@@ -42,9 +42,7 @@ def login_page():
 def login():
     user = User.get_by_email({"email":request.form["email"]})
     if not user :
-        print("this is before the flash")
         flash("Invalid Email/Password","login")
-        print("this is after the flash")
         return redirect("/login")
     if not bcrypt.check_password_hash(user.password,request.form["password"]):
         flash("Invalid Email/Password","login")
@@ -56,4 +54,4 @@ def login():
 @app.route("/logout",methods = ["POST"])
 def logout():
     session.clear()
-    return redirect("/")
+    return redirect("/login")
