@@ -24,6 +24,7 @@ class User:
                 VALUES(%(first_name)s,%(last_name)s,%(email)s,%(password)s,%(account_type)s)
                 """
         return connectToMySQL( DB ).query_db(query,data)
+    
 
     @classmethod
     def get_by_email(cls,data):
@@ -32,11 +33,37 @@ class User:
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         if result:
+            print(cls(result[0]))
+            return cls(result[0])
+        return False
+    @classmethod
+    def get_by_id(cls,data):
+        query = """
+                SELECT id FROM users WHERE email=%(email)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        if result:
             return cls(result[0])
         return False
 
+#this function will return 0 or 1 to know the type of the user account
+    @classmethod
+    def get_account_type(cls,data):
+        print('#'*30)
+        print(data)
+        print('before the querry') 
+        query="select account_type from users where users.id=%(id)s;"
+        result=connectToMySQL( DB ).query_db(query,data)
+        print("*"*20)
+        print (result)
+        print("*"*20)
+        return result
 
 
+
+
+
+#this is the validation method for the registration 
 
     @staticmethod
     def validate(data):
