@@ -12,6 +12,7 @@ class User:
         self.email = data["email"]
         self.password = data["password"]
         self.account_type = data["account_type"]
+        self.profile_pic = data["profile_pic"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
@@ -49,14 +50,8 @@ class User:
 #this function will return 0 or 1 to know the type of the user account
     @classmethod
     def get_account_type(cls,data):
-        print('#'*30)
-        print(data)
-        print('before the querry') 
         query="select account_type from users where users.id=%(id)s;"
         result=connectToMySQL( DB ).query_db(query,data)
-        print("*"*20)
-        print (result)
-        print("*"*20)
         return result
 
 

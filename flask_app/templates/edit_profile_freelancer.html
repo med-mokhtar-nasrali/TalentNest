@@ -4,38 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="edit_profile_freelancer.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_profile_freelancer.css') }}">
 </head>
 <body>
     <section>
         <div>
-            <img src="./talentnest-removebg-preview.png" alt="">
+            <img src="{{ url_for('static', filename='img/logo.png') }}">
         </div>
         <div class="form-box">
             <div class="form-value">
-                <form action="">
+                <form action="/freelancer/update/{{freelancer.id}}"method="post">
                     <h2>Edit Freelancer Profile</h2>
                     <div class="inputbox">
-                        <input type="text" required>
+                        <input type="text" name="phone" value="{{freelancer.phone}}" >
                         <label for="">Phone*</label>
+                        {% for message in get_flashed_messages(category_filter=['phone']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="about_me" rows="3" required></textarea>
+                        <textarea name="about_me" rows="3" >{{freelancer.about_me}}</textarea>
                         <label for="">About Me*</label>
+                        {% for message in get_flashed_messages(category_filter=['avout_me']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="experience" rows="3" required></textarea>
+                        <textarea name="experience" rows="3" >{{freelancer.experience}}</textarea>
                         <label for="">Experience</label>
+                        {% for message in get_flashed_messages(category_filter=['experience']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="skills" rows="3" required></textarea>
+                        <textarea name="skills" rows="3" >{{freelancer.skills}}</textarea>
                         <label for="">Skills*</label>
+                        {% for message in get_flashed_messages(category_filter=['skills']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <input type="text" required>
-                        <label for="">GitHub*</label>
+                        <textarea name="education" rows="3" ></textarea>
+                        <label for="">Education*</label>
+                        {% for message in get_flashed_messages(category_filter=['education']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
-                    <button>Save Info</button>
+                    <div class="inputbox">
+                        <input type="text" name="github">
+                        <label for="">GitHub*</label>
+                        {% for message in get_flashed_messages(category_filter=['github']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    <button type="submit">Save Info</button>
                 </form>
             </div>
         </div>
