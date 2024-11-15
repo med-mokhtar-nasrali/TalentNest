@@ -30,6 +30,8 @@ def register():
         session["user_id"] = user_id
         print (request.form["account_type"])
         if request.form["account_type"]=='1':
+            print (request.form["account_type"])
+        if request.form["account_type"]=='1':
             return redirect('/freelancer_form')
         if request.form["account_type"]=='0':
             return redirect('/recruiter_form')
@@ -62,7 +64,6 @@ def login():
 def logout():
     session.clear()
     return redirect("/login")
-    return redirect("/")
 
 
 #Display route for freelancer form
