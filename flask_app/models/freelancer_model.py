@@ -11,6 +11,8 @@ class Freelancer:
         self.about_me = data["about_me"]
         self.experience = data["experience"]
         self.skills = data["skills"]
+        self.education = data["education"]
+        self.github = data["github"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.user_id = data["user_id"]
@@ -19,7 +21,7 @@ class Freelancer:
 # this method is to insert freelancer additionl info into its table
     @classmethod
     def add_freelancer_info(cls,data):
-        query="insert into freelancers (phone, about_me, experience, skills, user_id) values (%(phone)s, %(about_me)s, %(experience)s, %(skills)s,%(user_id)s);"    
+        query="insert into freelancers (phone, about_me, experience, skills, education, github, user_id) values (%(phone)s, %(about_me)s, %(experience)s, %(skills)s, %(education)s, %(github)s,%(user_id)s);"    
         return connectToMySQL( DB ).query_db(query,data)
     
     @classmethod
@@ -29,7 +31,9 @@ class Freelancer:
                 phone = %(phone)s,
                 about_me = %(about_me)s,
                 experience = %(experience)s,
-                skills = %(skills)s
+                skills = %(skills)s,
+                education = %(education)s,
+                github = %(github)s
                 WHERE freelancers.id = %(id)s;
                 """
         return connectToMySQL( DB ).query_db(query,data)
@@ -62,4 +66,10 @@ class Freelancer:
         if len(data["skills"])<3:
             is_valid = False
             flash("Skills cant be empty","skills")
+        if len(data["education"])<3:
+            is_valid = False
+            flash("Education cant be empty","education")
+        if len(data["github"])<3:
+            is_valid = False
+            flash("Github cant be empty","github")
         return is_valid

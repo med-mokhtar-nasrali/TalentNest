@@ -18,7 +18,7 @@
                         <input type="text" name="email">
                         <label for="">Email</label>
                         {% for message in get_flashed_messages(category_filter=['login']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
@@ -26,7 +26,7 @@
                         <input type="password" name="password" >
                         <label for="">Password</label>
                         {% for message in get_flashed_messages(category_filter=['login']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="forget">

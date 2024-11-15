@@ -18,7 +18,7 @@
                         <input type="text" name="first_name" >
                         <label for="" >First Name</label>
                         {% for message in get_flashed_messages(category_filter=['first_name']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
@@ -26,7 +26,7 @@
                         <input type="text" name="last_name" >
                         <label for="">Last Name</label>
                         {% for message in get_flashed_messages(category_filter=['last_name']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
@@ -34,7 +34,7 @@
                         <input type="email" name="email">
                         <label for="">Email</label>
                         {% for message in get_flashed_messages(category_filter=['email']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
@@ -42,7 +42,7 @@
                         <input type="password" name="password">
                         <label for="">Password</label>
                         {% for message in get_flashed_messages(category_filter=['password']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
@@ -50,7 +50,7 @@
                         <input type="password" name="confirm_password" >
                         <label for="">Confim Password</label>
                         {% for message in get_flashed_messages(category_filter=['confirm_password']) %}
-                            <p class="bg-warning text-danger"> {{ message }} </p>
+                            <p style=" color: red;"> {{ message }} </p>
                         {% endfor %}
                     </div>
                     <div class="radio">

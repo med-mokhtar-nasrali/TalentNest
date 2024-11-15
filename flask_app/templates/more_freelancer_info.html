@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Freelancer Profile</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/more_freelancer_info.css') }}">
 </head>
 <body>
@@ -16,28 +16,46 @@
                 <form action="/add_info/freelancer" method="POST">
                     <h2>Freelancer Profile</h2>
                     <div class="inputbox">
-                        <input type="text" name="phone" required>
+                        <input type="text" name="phone" >
                         <label for="">Phone*</label>
+                        {% for message in get_flashed_messages(category_filter=['phone']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="about_me" rows="3" required></textarea>
+                        <textarea name="about_me" rows="3" ></textarea>
                         <label for="">About Me*</label>
+                        {% for message in get_flashed_messages(category_filter=['about_me']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="experience" rows="3" required></textarea>
+                        <textarea name="experience" rows="3" ></textarea>
                         <label for="">Experience</label>
+                        {% for message in get_flashed_messages(category_filter=['experience']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="skills" rows="3" required></textarea>
+                        <textarea name="skills" rows="3" ></textarea>
                         <label for="">Skills*</label>
+                        {% for message in get_flashed_messages(category_filter=['skills']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <input type="text" required name="github">
+                        <textarea name="education" rows="3" ></textarea>
+                        <label for="">Education*</label>
+                        {% for message in get_flashed_messages(category_filter=['education']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="inputbox">
+                        <input type="text"  name="github">
                         <label for="">GitHub*</label>
-                    </div>
-                    <div class="inputbox">
-                        <input type="file" name="cv" >
-                        <label for="">Upload Cv </label>
+                        {% for message in get_flashed_messages(category_filter=['github']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <button>Save Info</button>
                 </form>

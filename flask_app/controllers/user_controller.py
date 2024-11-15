@@ -88,14 +88,15 @@ def register_recruiter():
 
 @app.route('/add_info/freelancer',methods=["post"])
 def add_info():
-    data = {
-        **request.form,
-        'user_id':session['user_id']
-    }
-    freelancer_id=Freelancer.add_freelancer_info(data)
-    session['freelancer_id']=freelancer_id
-    return redirect('/home')
-
+    if Freelancer.validate(request.form):
+        data = {
+            **request.form,
+            'user_id':session['user_id']
+        }
+        freelancer_id=Freelancer.add_freelancer_info(data)
+        session['freelancer_id']=freelancer_id
+        return redirect('/home')
+    return redirect('/freelancer_form')
 
 #Action Route for the recruiter profile form 
 
