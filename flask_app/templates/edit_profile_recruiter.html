@@ -3,29 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="edit_profile_recruiter.css">
+    <title>Edit Recruiter Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_profile_recruiter.css') }}">
 </head>
 <body>
     <section>
         <div>
-            <img src="./talentnest-removebg-preview.png" alt="">
+            <img src="{{ url_for('static', filename='img/logo.png') }}">
         </div>
         <div class="form-box">
             <div class="form-value">
-                <form action="">
+                <form action="/recruiter/update/{{recruiter.id}}" method="post">
                     <h2>Edit Recruiter Profile</h2>
                     <div class="inputbox">
-                        <input type="text" required>
+                        <input type="text" name="phone">
                         <label for="">Phone*</label>
+                        {% for message in get_flashed_messages(category_filter=['phone']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="about_me" rows="3" required></textarea>
+                        <textarea name="about_me" rows="3" ></textarea>
                         <label for="">About Me*</label>
+                        {% for message in get_flashed_messages(category_filter=['about_me']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <input type="text">
+                        <input type="text" name="company_name">
                         <label for="">Company Name</label>
+                        {% for message in get_flashed_messages(category_filter=['company_name']) %}
+                        <p style=" color: red;">{{message}}</p>
+                        {% endfor %}
                     </div>
                     <button>Save Info</button>
                 </form>
