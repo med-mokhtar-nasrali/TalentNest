@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootsnav.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_before.css') }}">
+</head>
+
+<body>
+    <section class="top-area">
+        <div class="header-area">
+            <nav class="navbar navbar-default bootsnav navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+                <div class="container">
+                    <div class="navbar-header">
+                        <div class="navbar-header">
+						</div>
+						<div class="navbar-flex" id="navbar-menu">
+							<img style="height: 150px;" src="{{ url_for('static', filename='img/logo.png') }}">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="scroll active"><a href="#home">Home</a></li>
+								<li class="scroll"><a href="#works">Top Talents</a></li>
+								<li class="scroll"><a href="#explore">Top Recruiters</a></li>
+								<li class="scroll"><a href="#reviews">Job Offers</a></li>
+								<li class="scroll"><a href="#blog">My Profile</a></li>
+                                {%if user.account_type == 3%}
+                                    <li class="scroll"><a style="color: Red;" href="/admin">Admin</a></li>
+                                {% endif %}
+                                <form action="/logout" method="post">
+                                    <li class="scroll">
+                                    <button>Log Out</button>
+                                    </li>
+                                </form>
+							</ul>
+						</div>
+					</div>	
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section id="home" class="welcome-hero">
+        <div class="container">
+            <div class="title-container">
+                <h1 class="animate-title">
+                    <span>BEST</span>
+                    <span>PLACE</span>
+                    <span>TO</span>
+                    <span>FIND</span>
+                    <span>JOBS</span>
+                    <span>OR</span>
+                    <span>TALENTS</span>
+                </h1>
+            </div>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="What Job you're looking for?" id="searchInput">
+            <button type="submit" class="search"><ion-icon  name="search-outline"></ion-icon></button>
+        </div>
+        <div class="list-topics-content">
+            <div class="left_list">
+                <ul>
+                    <li>
+                        <div class="single-list-topics-content">
+                            <div class="single-list-topics-icon">
+                                <img src="{{ url_for('static', filename='img/WEB_DEVELOPER-removebg-preview__1_-removebg-preview.png') }}">
+                            </div>
+                            <h2><a href="#">Web Developer</a></h2>
+                            <p>9250 Available Jobs</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="single-list-topics-content">
+                            <div class="single-list-topics-icon">
+                                <img src="{{ url_for('static', filename='img/DESIGNER-removebg-preview.png') }}">
+                                
+                            </div>
+                            <h2><a href="#">Designer</a></h2>
+                            <p>3172 Available Jobs</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="single-list-topics-content">
+                            <div class="single-list-topics-icon">
+                                <img src="{{ url_for('static', filename='img//VIDEO_EDITOR-removebg-preview-removebg-preview.png') }}">
+                            </div>
+                            <h2><a href="#">Video Editor</a></h2>
+                            <p>1172 Available Jobs</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="right_list">
+                <ul>
+                    <li>
+                        <div class="single-list-topics-content">
+                            <div class="single-list-topics-icon">
+                                <img src="{{ url_for('static', filename='img//translator-removebg-preview-removebg-preview.png') }}">
+                            </div>
+                            <h2><a href="#">Translator</a></h2>
+                            <p>4214 Available Jobs</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="single-list-topics-content">
+                            <div class="single-list-topics-icon">
+                                <img src="{{ url_for('static', filename='img//ARCHITECTURE-removebg-preview-removebg-preview.png') }}">
+                            </div>
+                            <h2><a href="#">Architecture</a></h2>
+                            <p>6372 Available Jobs</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="single-list-topics-content">
+                            <div class="single-list-topics-icon">
+                                <img src="{{ url_for('static', filename='img//AI_SERVICE-removebg-preview-removebg-preview.png') }}">
+                            </div>
+                            <h2><a href="#">AI Services</a></h2>
+                            <p>2172 Available Jobs</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
