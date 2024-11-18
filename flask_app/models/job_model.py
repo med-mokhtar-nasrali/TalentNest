@@ -25,6 +25,21 @@ class Job:
         query="insert into jobs (title, required_tech, budget, deadline, description, category, recruiter_id) values (%(title)s, %(required_tech)s, %(budget)s,%(deadline)s,%(description)s ,%(category)s,%(recruiter_id)s);"  
         return connectToMySQL( DB ).query_db(query,data)
     
+    @classmethod
+    def show_all_jobs(cls):
+        print('/'*30)
+        print('before the querry')
+        query=" select * from jobs ; "
+        print('after the querry')
+        results=connectToMySQL(DB).query_db(query)
+        all_jobs=[]
+        for row in results :
+            job=cls(row)
+            all_jobs.append(job)
+        print (all_jobs)    
+        return all_jobs    
+        
+
 
 
     @staticmethod

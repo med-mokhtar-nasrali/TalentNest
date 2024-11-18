@@ -27,6 +27,21 @@ def add_job():
     return redirect('/job_form')
 
 
+# this is the display route to display job offers
+
+@app.route('/job_offers')
+def show_all_jobs():
+    print('*'*30)
+    all_jobs=Job.show_all_jobs()
+    print(all_jobs)
+    
+    return render_template('job_offers.html',all_jobs=all_jobs)
+
+
+
+
+
+
 
 
 
