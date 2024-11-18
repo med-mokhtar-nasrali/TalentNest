@@ -53,9 +53,23 @@ class User:
         query="select account_type from users where users.id=%(id)s;"
         result=connectToMySQL( DB ).query_db(query,data)
         return result
+    
+
+    #get the id of the user
+    @classmethod
+    def get_user_by_id(cls,data):
+        query="select * from users where users.id=%(id)s;"
+        result=connectToMySQL( DB ).query_db(query,data)
+        return cls(result[0])
 
 
-
+    @classmethod
+    def delete_user(cls,data):
+        query=  """ 
+                DELETE FROM users WHERE users.id=%(id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result
 
 
 #this is the validation method for the registration 

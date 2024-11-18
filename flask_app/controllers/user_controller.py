@@ -12,6 +12,18 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template("home_before.html")
 
+#Display Route for the home page
+@app.route("/home")
+def home_page():
+    if "user_id" not in session:
+        return redirect('/login')
+    data = {
+        **request.form,
+        'id':session['user_id'],
+    }
+    user = User.get_user_by_id(data)
+    return render_template("home.html",user = user)
+
 #Display Route For the registration page
 @app.route("/registration")
 def registration():
@@ -110,3 +122,21 @@ def add_info_recruiter():
     recruiter_id=Recruiter.add_recruiter_info(data)
     session['recruiter_id']= recruiter_id
     return redirect('/home')
+
+
+
+#Display route for admin dashboard
+
+@app.route("/admin")
+def show_admin():
+    if "user_id" not in session:
+        return redirect('/login')
+    data = {
+        **request.form,
+        'id':session['user_id'],
+    }
+    user = User.get_user_by_id(data)
+    if user.account_type == 3:
+        return render_template("admin_html.html")
+    return redirect("/home")
+

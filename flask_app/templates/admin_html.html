@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TN Admin Dashboard</title>
+    <link rel="stylesheet" href="admin_css.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_css.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <h1>TN Admin Dashboard</h1>
+            <div class="admin-info">
+                <span>Welcome, Admin</span>
+                <form action="/logout" method="post">
+                    <button class="btn btn-danger">Log Out</button>
+                </form>
+            </div>
+        </header>
+
+        <main>
+            <section class="users-section">
+                <div class="section-header">
+                    <h2>Users Management</h2>
+                    <div class="filters">
+                        <input type="text" id="userSearch" placeholder="Search users..." class="search-input">
+                        <select id="userTypeFilter" class="filter-select">
+                            <option value="all">All Types</option>
+                            <option value="freelancers">Freelancers</option>
+                            <option value="recruiters">Recruiters</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="name">Name ↕</th>
+                                <th data-sort="date">Created Date ↕</th>
+                                <th data-sort="rating">Rating ↕</th>
+                                <th data-sort="type">User Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="reports-section">
+                <div class="section-header">
+                    <h2>Reports</h2>
+                    <div class="filters">
+                        <input type="text" id="reportSearch" placeholder="Search reports..." class="search-input">
+                        <select id="reportStatusFilter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="reportsTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="date">Date ↕</th>
+                                <th data-sort="reporter">Reporter</th>
+                                <th data-sort="reported">Reported User</th>
+                                <th data-sort="type">Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h2>Total Users</h2>
+                    <p id="user-count">100</p>
+                </div>
+                <div class="card">
+                    <h2>Total Jobs</h2>
+                    <p id="job-count">50</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+</body>
+</html>
