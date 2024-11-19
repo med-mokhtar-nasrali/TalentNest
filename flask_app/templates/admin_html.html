@@ -35,12 +35,9 @@
                 <div class="section-header">
                     <h2>Users List</h2>
                     <div class="filters">
-                        <input type="text" id="userSearch" placeholder="Search users..." class="search-input">
-                        <select id="userTypeFilter" class="filter-select">
-                            <option value="all">All Types</option>
-                            <option value="Freelancer">Freelancers</option>
-                            <option value="Recruiter">Recruiters</option>
-                        </select>
+                        <form action="/search_user"></form>
+                        <input type="text" name="search_users" id="reportSearch" placeholder="Search users..." class="search-input">  
+                        <button type="submit" class="search_user btn"><ion-icon  name="search-outline"></ion-icon></button>
                     </div>
                 </div>
                 <div class="table-container">
@@ -79,12 +76,9 @@
                 <div class="section-header">
                     <h2>Job Offers</h2>
                     <div class="filters">
-                        <input type="text" id="reportSearch" placeholder="Search reports..." class="search-input">
-                        <select id="reportStatusFilter" class="filter-select">
-                            <option value="all">All Status</option>
-                            <option value="pending">Pending</option>
-                            <option value="resolved">Resolved</option>
-                        </select>
+                        <form action="/search_offers"></form>
+                        <input type="text" name="search_offers" id="reportSearch" placeholder="Search offers..." class="search-input">
+                        <button type="submit" class="search_offers btn"><ion-icon  name="search-outline"></ion-icon></button>                    
                     </div>
                 </div>
                 <div class="table-container">
@@ -123,12 +117,9 @@
                 <div class="section-header">
                     <h2>Reports</h2>
                     <div class="filters">
-                        <input type="text" id="reportSearch" placeholder="Search reports..." class="search-input">
-                        <select id="reportStatusFilter" class="filter-select">
-                            <option value="all">All Status</option>
-                            <option value="pending">Pending</option>
-                            <option value="resolved">Resolved</option>
-                        </select>
+                        <form action="/search_reports"></form>
+                        <input type="text" name="search_reports" id="reportSearch" placeholder="Search reports..." class="search-input">
+                        <button type="submit" class="search_reports btn"><ion-icon  name="search-outline"></ion-icon></button>                   
                     </div>
                 </div>
                 <div class="table-container">
@@ -153,5 +144,7 @@
         </div>
         </main>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

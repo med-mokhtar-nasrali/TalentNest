@@ -25,7 +25,7 @@
 								<li class="scroll active"><a href="#home">Home</a></li>
 								<li class="scroll"><a href="#works">Top Talents</a></li>
 								<li class="scroll"><a href="#explore">Top Recruiters</a></li>
-								<li class="scroll"><a href="#reviews">Job Offers</a></li>
+								<li class="scroll"><a href="/job_offers">Job Offers</a></li>
 								<li class="scroll"><a href="#blog">My Profile</a></li>
                                 {%if user.account_type == 3%}
                                     <li class="scroll"><a style="color: Red;" href="/admin">Admin</a></li>
@@ -58,8 +58,10 @@
             </div>
         </div>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="What Job you're looking for?" id="searchInput">
-            <button type="submit" class="search"><ion-icon  name="search-outline"></ion-icon></button>
+            <form action="/search" method="POST">
+                <input type="text" name="search"class="search-input " placeholder="What Job you're looking for?" id="searchInput">
+                <button type="submit" class="search"><ion-icon  name="search-outline"></ion-icon></button>
+            </form>
         </div>
         <div class="list-topics-content">
             <div class="left_list">
@@ -69,7 +71,7 @@
                             <div class="single-list-topics-icon">
                                 <img src="{{ url_for('static', filename='img/WEB_DEVELOPER-removebg-preview__1_-removebg-preview.png') }}">
                             </div>
-                            <h2><a href="#">Web Developer</a></h2>
+                            <h2><a href="/job_offers/web%20developer">Web Developer</a></h2>
                             <p>9250 Available Jobs</p>
                         </div>
                     </li>
@@ -79,7 +81,7 @@
                                 <img src="{{ url_for('static', filename='img/DESIGNER-removebg-preview.png') }}">
                                 
                             </div>
-                            <h2><a href="#">Designer</a></h2>
+                            <h2><a href="/job_offers/designer">Designer</a></h2>
                             <p>3172 Available Jobs</p>
                         </div>
                     </li>
@@ -88,7 +90,7 @@
                             <div class="single-list-topics-icon">
                                 <img src="{{ url_for('static', filename='img//VIDEO_EDITOR-removebg-preview-removebg-preview.png') }}">
                             </div>
-                            <h2><a href="#">Video Editor</a></h2>
+                            <h2><a href="/job_offers/video%20editor">Video Editor</a></h2>
                             <p>1172 Available Jobs</p>
                         </div>
                     </li>
@@ -101,7 +103,7 @@
                             <div class="single-list-topics-icon">
                                 <img src="{{ url_for('static', filename='img//translator-removebg-preview-removebg-preview.png') }}">
                             </div>
-                            <h2><a href="#">Translator</a></h2>
+                            <h2><a href="/job_offers/translator">Translator</a></h2>
                             <p>4214 Available Jobs</p>
                         </div>
                     </li>
@@ -110,7 +112,7 @@
                             <div class="single-list-topics-icon">
                                 <img src="{{ url_for('static', filename='img//ARCHITECTURE-removebg-preview-removebg-preview.png') }}">
                             </div>
-                            <h2><a href="#">Architecture</a></h2>
+                            <h2><a href="/job_offers/architecture">Architecture</a></h2>
                             <p>6372 Available Jobs</p>
                         </div>
                     </li>
@@ -119,7 +121,7 @@
                             <div class="single-list-topics-icon">
                                 <img src="{{ url_for('static', filename='img//AI_SERVICE-removebg-preview-removebg-preview.png') }}">
                             </div>
-                            <h2><a href="#">AI Services</a></h2>
+                            <h2><a href="/job_offers/ai%20services">AI Services</a></h2>
                             <p>2172 Available Jobs</p>
                         </div>
                     </li>

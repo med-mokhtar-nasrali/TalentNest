@@ -51,6 +51,23 @@ def delete_job(id):
 
 
 
+@app.route("/job_offers/<category>")
+def show_all_by_category(category):
+    if "user_id" not in session:
+        return redirect('/login')
+    list_of_jobs = Job.show_all_by_category({"category":category})
+    print(list_of_jobs)
+    return render_template("job_by_category.html", list_of_jobs=list_of_jobs)
+
+@app.route("/search",methods=["post"])
+def search():
+    s = request.form["search"]
+    return redirect(f"/job_offers/{s}")
+
+
+
+
+
 
 
 

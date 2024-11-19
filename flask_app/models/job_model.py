@@ -55,6 +55,19 @@ class Job:
         result = connectToMySQL( DB ).query_db(query,data)
         return result
 
+    @classmethod
+    def show_all_by_category(cls,data):
+        query="SELECT * FROM jobs WHERE category = %(category)s;"
+        results=connectToMySQL( DB ).query_db(query,data)
+        print(results)
+        if results != False :
+            all_jobs_by_category=[]
+            for row in results:
+                job=cls(row)
+                all_jobs_by_category.append(job)
+            return all_jobs_by_category
+        else:
+            return False
 
 
     @staticmethod

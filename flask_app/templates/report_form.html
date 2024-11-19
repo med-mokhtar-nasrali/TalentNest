@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/report_form.css') }}">
+    <title>Report Forms</title>
+</head>
+<body>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <h1>Report Form:</h1>
+        <form action="/report/user" method="POST">
+    
+            <div class="formbold-input-radio-wrapper">
+                <label for="jobtitle" class="formbold-form-label"> What is the report reason? </label>
+    
+                <div class="formbold-radio-flex">
+                    <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        Violation of Terms of Service
+                        <span class="formbold-radio-checkmark"></span>
+                    </label>
+                    </div>
+    
+                    <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        Unresponsive Users
+                        <span class="formbold-radio-checkmark"></span>
+                    </label>
+                    </div>
+    
+                    <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        Inappropriate Content
+                        <span class="formbold-radio-checkmark"></span>
+                    </label>
+                    </div>
+    
+                    <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        Others
+                        <span class="formbold-radio-checkmark"></span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+    
+            <div>
+                <label for="message" class="formbold-form-label"> Message </label>
+                <textarea
+                    rows="6"
+                    name="message"
+                    id="message"
+                    placeholder="Type your message"
+                    class="formbold-form-input"
+                ></textarea>
+            </div>
+    
+            <button class="formbold-btn">
+                Send Report
+            </button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>
