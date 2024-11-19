@@ -36,14 +36,19 @@
     <div class="under_nav">
         <div class="joblist"> 
             {% for jobs in all_jobs %}
+            {% if session['freelancer_id'] not in jobs.applied_freelancers %}
             <div class="offer">
                 <p>{{jobs.category}}</p>
                 <p>{{jobs.title}}</p>
                 <p>recruiter name</p>
                 <p>{{jobs.required_tech}}</p>
                 <p>{{jobs.budget}}</p>
-                <button class="btn btn-primary btn-sm">Apply now</button>
+                <form action="/apply/{{jobs.id}}" method="post">
+                    <button class="btn btn-primary btn-sm">Apply now</button>
+                </form>
+                
             </div>
+            {% endif %}
             {% endfor %}
         </div>
 

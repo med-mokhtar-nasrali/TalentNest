@@ -18,7 +18,16 @@ class Job:
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.recruiter_id = data["recruiter_id"]
+        self.applied_freelancers=Job.get_applied_freelancers({'job_id':self.id})
     
+    @classmethod
+    def get_applied_freelancers(cls,data):
+        query="select * from applications where job_id=%(job_id)s ; "
+        results=connectToMySQL(DB).query_db(query,data)
+        all_freelancers_id=[] 
+        for row in results :
+            all_freelancers_id.append(row["freelancer_id"])
+        return all_freelancers_id    
 
 
     @classmethod

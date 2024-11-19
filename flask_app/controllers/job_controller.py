@@ -40,9 +40,10 @@ def show_all_jobs():
     return render_template('job_offers.html',all_jobs=all_jobs)
 
 #applying to a job route
-@app.route('/apply/<int:job_id>')
+@app.route('/apply/<int:job_id>',methods=["post"])
 def apply(job_id):
     Job.apply({'job_id':job_id,'freelancer_id':session['freelancer_id']})
+    return redirect('/job_offers')
 
 
 #delete job route in admin page 
