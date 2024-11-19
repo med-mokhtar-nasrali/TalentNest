@@ -17,13 +17,15 @@ def job_create():
 @app.route('/add_job',methods=["post"])
 def add_job():
     if Job.validate(request.form):
+        print ("before the data")
         data = {
             **request.form,
             'recruiter_id':session['recruiter_id']
         }
+        print ("after the data")
         job_id=Job.add_job(data)
         session['job_id']= job_id
-        return redirect ('/home')
+        return redirect ('/job_offers')
     return redirect('/job_form')
 
 
@@ -37,10 +39,10 @@ def show_all_jobs():
     
     return render_template('job_offers.html',all_jobs=all_jobs)
 
-# #applying to a job route
-# @app.route('/apply/<int:user_id>/<int:job_id>')
-# def apply(job_id):
-#     Job.apply()
+#applying to a job route
+@app.route('/apply/<int:job_id>')
+def apply(job_id):
+    Job.apply({'job_id':job_id,'freelancer_id':session['freelancer_id']})
 
 
 #delete job route in admin page 
