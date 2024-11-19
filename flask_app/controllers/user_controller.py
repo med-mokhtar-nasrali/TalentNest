@@ -42,8 +42,9 @@ def register():
         user_id = User.register(data)
         session["user_id"] = user_id
         print (request.form["account_type"])
-        if request.form["account_type"]=='1':
+        if request.form["account_type"]=='3':
             print (request.form["account_type"])
+            return redirect('/admin')
         if request.form["account_type"]=='1':
             return redirect('/freelancer_form')
         if request.form["account_type"]=='0':
@@ -70,6 +71,12 @@ def login():
         return redirect("/login")
     session["email"] = user.email
     session["user_id"] = user.id
+    if user.account_type ==0:
+        rec=Recruiter.get_by_user_id({'user_id':session["user_id"]})
+        session["recruiter_id"]=rec.id
+    if user.account_type==1:
+        fre=Freelancer.get_by_user_id({'user_id':session["user_id"]})
+        session["freelancer_id"]=fre.id
     return redirect("/home")
 
 #Action Route to logout

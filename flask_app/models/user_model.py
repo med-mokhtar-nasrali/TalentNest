@@ -61,6 +61,7 @@ class User:
         query="select * from users where users.id=%(id)s;"
         result=connectToMySQL( DB ).query_db(query,data)
         return cls(result[0])
+    
 
     #show all users
     @classmethod

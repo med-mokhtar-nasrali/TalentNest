@@ -1,7 +1,7 @@
 from flask_app.config.myconnection import connectToMySQL
 from flask_app import DB
 from flask import flash
-from flask_app.models.user_model import User
+from flask_app.models import user_model
 
 
 
@@ -14,6 +14,7 @@ class Recruiter:
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.user_id = data["user_id"]
+        self.posted_by = user_model.User.get_user_by_id({'id':self.user_id})
 
 #this method is to insert recuiter addional info into its table 
     @classmethod
@@ -36,12 +37,21 @@ class Recruiter:
     def get_by_id(cls,data):
         query = """
                 SELECT * FROM recruiters
-                JOIN users ON recruiters.user_id = user_id
+                JOIN users ON recruiters.user_id = users.id
                 WHERE recruiters.id = %(id)s;
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         recruiter = cls(result[0])
-        recruiter.posted_by = f'{result[0]["first_name"]}{result[0]["last_name"]}'
+        return recruiter
+    @classmethod
+    def get_by_user_id(cls,data):
+        query = """
+                SELECT * FROM recruiters
+                JOIN users ON recruiters.user_id = users.id
+                WHERE recruiters.user_id = %(user_id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        recruiter = cls(result[0])
         return recruiter
 
 

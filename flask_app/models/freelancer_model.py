@@ -1,7 +1,7 @@
 from flask_app.config.myconnection import connectToMySQL
 from flask_app import DB
 from flask import flash
-from flask_app.models.user_model import User
+from flask_app.models import user_model
 
 
 class Freelancer:
@@ -16,7 +16,7 @@ class Freelancer:
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.user_id = data["user_id"]
-        self.posted_by = ""
+        self.posted_by = user_model.User.get_user_by_id({'id':self.user_id})
 
 # this method is to insert freelancer additionl info into its table
     @classmethod
@@ -24,6 +24,19 @@ class Freelancer:
         query="insert into freelancers (phone, about_me, experience, skills, education, github, user_id) values (%(phone)s, %(about_me)s, %(experience)s, %(skills)s, %(education)s, %(github)s,%(user_id)s);"    
         return connectToMySQL( DB ).query_db(query,data)
     
+    @classmethod
+    def get_by_user_id(cls,data):
+        query = """
+                SELECT * FROM freelancers
+                JOIN users ON freelancers.user_id = user_id
+                WHERE freelancers.user_id = %(user_id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        Freelancer = cls(result[0])
+        return Freelancer
+
+
+
     @classmethod
     def update(cls,data):
         query = """
@@ -48,7 +61,6 @@ class Freelancer:
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         freelancer = cls(result[0])
-        freelancer.posted_by = f'{result[0]["first_name"]}{result[0]["last_name"]}'
         return freelancer
 
     @staticmethod

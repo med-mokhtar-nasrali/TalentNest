@@ -20,6 +20,7 @@ class Job:
         self.recruiter_id = data["recruiter_id"]
     
 
+
     @classmethod
     def add_job(cls,data):
         query="insert into jobs (title, required_tech, budget, deadline, description, category, recruiter_id) values (%(title)s, %(required_tech)s, %(budget)s,%(deadline)s,%(description)s ,%(category)s,%(recruiter_id)s);"  
@@ -68,7 +69,8 @@ class Job:
             is_valid = False
             flash("Required Tech can not be empty","required_tech ")
 
-        if len(data["budget"])<3:
+        x=int(data["budget"])
+        if type(x) !=int:
             is_valid = False
             flash("Budget can not be empty","budget")
 
