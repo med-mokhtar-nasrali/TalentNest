@@ -17,7 +17,9 @@
         </div>
         <div class="d-flex">
             <ul>
+                {%if "recruiter_id" in session%}
                 <li><a class="btn btn-primary" href="/job_form">Create Job</a></li>
+                {% endif %}
                 <li class="nav-item btn "  ><h6><a href="/home">Home</a></h6></li>
                 <li class="nav-item btn"><h6><a href="">Top Talents</a></h6></li>
                 <li class="nav-item btn"><h6><a href="">Top Recruiters</a></h6></li>
