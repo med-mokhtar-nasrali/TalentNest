@@ -56,17 +56,32 @@ class Job:
         result = connectToMySQL( DB ).query_db(query,data)
         return result
 
+    # @classmethod
+    # def show_all_by_category(cls,data):
+    #     query="SELECT * FROM jobs WHERE category = %(category)s;"
+    #     results=connectToMySQL( DB ).query_db(query,data)
+    #     print(results)
+    #     if results != False :
+    #         all_jobs_by_category=[]
+    #         for row in results:
+    #             job=cls(row)
+    #             all_jobs_by_category.append(job)
+    #         return all_jobs_by_category
+    #     else:
+    #         return False
     @classmethod
-    def show_all_by_category(cls,data):
-        query="SELECT * FROM jobs WHERE category = %(category)s;"
-        results=connectToMySQL( DB ).query_db(query,data)
-        print(results)
+    def show_all_by_category(cls, data_dict): 
+        query = """SELECT * FROM jobs WHERE LOWER(category) LIKE LOWER(%(category)s);"""
+        data = {
+            **data_dict,
+            "category": f"%{data_dict['category']}%"
+        }
+        results = connectToMySQL( DB ).query_db(query, data) 
         if results != False :
-            all_jobs_by_category=[]
+            all_jobs = [] 
             for row in results:
-                job=cls(row)
-                all_jobs_by_category.append(job)
-            return all_jobs_by_category
+                all_jobs.append(cls(row))
+            return all_jobs
         else:
             return False
 
@@ -94,5 +109,4 @@ class Job:
             is_valid = False
             flash("description can not be empty","description")
                 
-
         return is_valid    
