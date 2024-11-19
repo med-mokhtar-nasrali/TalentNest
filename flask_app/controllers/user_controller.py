@@ -2,6 +2,7 @@ from flask_app import app
 from flask_app.models.user_model import User
 from flask_app.models.freelancer_model import Freelancer
 from flask_app.models.recruiter_model import Recruiter
+from flask_app.models.job_model import Job
 from flask import render_template,session,redirect,flash,request
 from flask_bcrypt import Bcrypt # type: ignore
 bcrypt = Bcrypt(app)
@@ -125,6 +126,13 @@ def add_info_recruiter():
 
 
 
+#delete user route in admin page 
+@app.route('/delete/<int:id>', methods=["post"])
+def delete_user(id):
+    User.delete_user({'id':id})
+    return redirect ('/admin')
+
+
 #Display route for admin dashboard
 
 @app.route("/admin")
@@ -136,7 +144,12 @@ def show_admin():
         'id':session['user_id'],
     }
     user = User.get_user_by_id(data)
+    all_users=User.show_all()
+    all_freelancers=User.show_all_freelancers()
+    all_recruiters=User.show_all_recruiters()
+    all_jobs=Job.show_all_jobs()
     if user.account_type == 3:
-        return render_template("admin_html.html")
+        print (all_users)
+        return render_template("admin_html.html",all_users=all_users,all_freelancers=all_freelancers,all_recruiters=all_recruiters,all_jobs=all_jobs)
     return redirect("/home")
 

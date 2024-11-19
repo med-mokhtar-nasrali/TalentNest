@@ -14,7 +14,6 @@
         <header class="header">
             <h1>TN Admin Dashboard</h1>
             <div class="admin-info">
-                <span>Welcome, Admin</span>
                 <form action="/logout" method="post">
                     <button class="btn btn-danger">Log Out</button>
                 </form>
@@ -22,15 +21,25 @@
         </header>
 
         <main>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h2>Total Users</h2>
+                    <p id="user-count">100</p>
+                </div>
+                <div class="card">
+                    <h2>Total Jobs</h2>
+                    <p id="job-count">50</p>
+                </div>
+                </div>
             <section class="users-section">
                 <div class="section-header">
-                    <h2>Users Management</h2>
+                    <h2>Users List</h2>
                     <div class="filters">
                         <input type="text" id="userSearch" placeholder="Search users..." class="search-input">
                         <select id="userTypeFilter" class="filter-select">
                             <option value="all">All Types</option>
-                            <option value="freelancers">Freelancers</option>
-                            <option value="recruiters">Recruiters</option>
+                            <option value="Freelancer">Freelancers</option>
+                            <option value="Recruiter">Recruiters</option>
                         </select>
                     </div>
                 </div>
@@ -46,6 +55,65 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for users in all_users:%}
+                            <tr>
+                            <td>{{users.first_name}} {{users.last_name}}</td>
+                            <td>{{users.created_at}}</td>
+                            <td></td>
+                            {% if users.account_type ==0 %}
+                                <td>Freelancer</td>
+                            {% elif users.account_type ==1  %}
+                                <td>Recruiter</td>
+                            {% else %}
+                                <td>Admin</td>        
+                            {% endif %}
+                            <td>
+                                <form action="/delete/{{users.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form></td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="reports-section">
+                <div class="section-header">
+                    <h2>Job Offers</h2>
+                    <div class="filters">
+                        <input type="text" id="reportSearch" placeholder="Search reports..." class="search-input">
+                        <select id="reportStatusFilter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="reportsTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="title">Job Title</th>
+                                <th data-sort="created_at">Creation Date ↕</th>
+                                <th data-sort="deadline">Deadline ↕</th>
+                                <th data-sort="budget">Budget</th>
+                                <th data-sort="category">Category</th>
+                                <th data-sort="recruiter_id">Recruiter ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in all_jobs:%}
+                            <tr>
+                                <td>{{job.title}}</td>
+                                <td>{{job.created_at}}</td>
+                                <td>{{job.deadline}}</td>
+                                <td>{{job.budget}}</td>
+                                <td>{{job.category}}</td>
+                                <td>{{job.recruiter_id}}</td>
+                                <td><form action="/delete_job/{{job.id}}" method="post">
+                                    <button class="btn btn-danger" >Delete</button>
+                                </form></td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -80,16 +148,7 @@
                     </table>
                 </div>
             </section>
-            <div class="dashboard-cards">
-                <div class="card">
-                    <h2>Total Users</h2>
-                    <p id="user-count">100</p>
-                </div>
-                <div class="card">
-                    <h2>Total Jobs</h2>
-                    <p id="job-count">50</p>
-                </div>
-                </div>
+            
             </div>
         </div>
         </main>

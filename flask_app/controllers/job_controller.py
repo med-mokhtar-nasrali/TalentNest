@@ -37,6 +37,17 @@ def show_all_jobs():
     
     return render_template('job_offers.html',all_jobs=all_jobs)
 
+# #applying to a job route
+# @app.route('/apply/<int:user_id>/<int:job_id>')
+# def apply(job_id):
+#     Job.apply()
+
+
+#delete job route in admin page 
+@app.route('/delete_job/<int:id>', methods=["post"])
+def delete_job(id):
+    Job.delete_job({'id':id})
+    return redirect ('/admin')
 
 
 

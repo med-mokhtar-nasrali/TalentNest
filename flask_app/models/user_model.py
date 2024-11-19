@@ -12,7 +12,7 @@ class User:
         self.email = data["email"]
         self.password = data["password"]
         self.account_type = data["account_type"]
-        self.profile_pic = data["profile_pic"]
+        # self.profile_pic = data["profile_pic"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
@@ -62,7 +62,37 @@ class User:
         result=connectToMySQL( DB ).query_db(query,data)
         return cls(result[0])
 
+    #show all users
+    @classmethod
+    def show_all(cls):
+        query="select * from users ;"
+        results=connectToMySQL( DB ).query_db(query)
+        all_users=[]
+        for row in results:
+            all_users.append(cls(row))
+        return all_users
+    
+    @classmethod
+    def show_all_freelancers(cls):
+        query="select * from users where account_type=0;"
+        results=connectToMySQL( DB ).query_db(query)
+        all_freelancers=[]
+        for row in results:
+            all_freelancers.append(cls(row))
+        return all_freelancers
 
+    @classmethod
+    def show_all_recruiters(cls):
+        query="select * from users where account_type=1;"
+        results=connectToMySQL( DB ).query_db(query)
+        all_recruiters=[]
+        for row in results:
+            all_recruiters.append(cls(row))
+        return all_recruiters
+
+        
+
+    # delete a specific user
     @classmethod
     def delete_user(cls,data):
         query=  """ 

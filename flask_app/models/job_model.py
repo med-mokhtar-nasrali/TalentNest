@@ -35,10 +35,25 @@ class Job:
         all_jobs=[]
         for row in results :
             job=cls(row)
-            all_jobs.append(job)
-        print (all_jobs)    
-        return all_jobs    
-        
+            all_jobs.append(job)   
+        return all_jobs 
+
+    # deleting a job 
+    @classmethod
+    def delete_job(cls,data):
+        query=  """ 
+                DELETE FROM jobs WHERE jobs.id=%(id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result 
+
+
+    #applying on a job offer 
+    @classmethod
+    def apply(cls,data):
+        query=" insert into applications (job_id, freelancer_id, status) values(%(job_id)s,%(freelancer_id)s,'Pending') ;"
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result
 
 
 
