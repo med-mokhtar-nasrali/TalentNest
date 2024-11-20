@@ -12,6 +12,7 @@ class Freelancer:
         self.experience = data["experience"]
         self.skills = data["skills"]
         self.education = data["education"]
+        self.badges = data["badges"]
         self.github = data["github"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
@@ -62,6 +63,26 @@ class Freelancer:
         result = connectToMySQL( DB ).query_db(query,data)
         freelancer = cls(result[0])
         return freelancer
+    
+    @classmethod
+    def get_all_freelancers(cls):
+        query = """
+                SELECT * FROM freelancers;
+                """
+        result = connectToMySQL( DB ).query_db(query)
+        all_freelancers=[]
+        for row in result:
+            all_freelancers.append(cls(row))
+        return all_freelancers
+    
+    @classmethod
+    def get_all_freelancers_profile(cls,data):
+        query = """
+                SELECT * FROM freelancers WHERE user_id=%(user_id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result[0]
+    
 
     @staticmethod
     def validate(data):

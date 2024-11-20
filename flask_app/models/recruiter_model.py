@@ -60,6 +60,17 @@ class Recruiter:
         result = connectToMySQL( DB ).query_db(query,data)
         recruiter = cls(result[0])
         return recruiter
+    
+    @classmethod
+    def get_all_recruiters(cls):
+        query = """
+                SELECT * FROM recruiters;
+                """
+        result = connectToMySQL( DB ).query_db(query)
+        all_recruiters=[]
+        for row in result:
+            all_recruiters.append(cls(row))
+        return all_recruiters
 
 
     @staticmethod

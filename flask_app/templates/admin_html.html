@@ -33,7 +33,38 @@
                 </div>
             <section class="users-section">
                 <div class="section-header">
-                    <h2>Users List</h2>
+                    <h2>Recruiters List</h2>
+                    <div class="filters">
+                        <form action="/search_user"></form>
+                        <input type="text" name="search_users" id="reportSearch" placeholder="Search users..." class="search-input">  
+                        <button type="submit" class="search_user btn"><ion-icon  name="search-outline"></ion-icon></button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="name">Recruiter Name ↕</th>
+                                <th data-sort="date">Date of creation ↕</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for users in all_recruiters:%}
+                            <tr>
+                            <td>{{users.posted_by.first_name}} {{users.posted_by.last_name}}</td>
+                            <td>{{users.created_at}}</td>
+                            <td>
+                                <form action="/delete/{{users.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form></td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="users-section">
+                <div class="section-header">
+                    <h2>Freelancers List</h2>
                     <div class="filters">
                         <form action="/search_user"></form>
                         <input type="text" name="search_users" id="reportSearch" placeholder="Search users..." class="search-input">  
@@ -45,28 +76,21 @@
                         <thead>
                             <tr>
                                 <th data-sort="name">Name ↕</th>
-                                <th data-sort="date">Created Date ↕</th>
+                                <th data-sort="date">Date of creation ↕</th>
                                 <th data-sort="rating">Rating ↕</th>
-                                <th data-sort="type">User Type</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for users in all_users:%}
+                            {% for freelancer in all_freelancers:%}
                             <tr>
-                            <td>{{users.first_name}} {{users.last_name}}</td>
-                            <td>{{users.created_at}}</td>
+                            <td>{{freelancer.posted_by.first_name}} {{freelancer.posted_by.last_name}}</td>
+                            <td>{{freelancer.created_at}}</td>
                             <td></td>
-                            {% if users.account_type ==0 %}
-                                <td>Freelancer</td>
-                            {% elif users.account_type ==1  %}
-                                <td>Recruiter</td>
-                            {% else %}
-                                <td>Admin</td>        
-                            {% endif %}
-                            <td>
-                                <form action="/delete/{{users.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form></td>
-                        </tr>
+                            <td class="d-flex">
+                                <form action="/delete/{{freelancer.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form>
+                            <form action="/admin/add_badges/{{freelancer.id}}"><button class="btn btn-primary" >Add Badge</button></form></td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -86,7 +110,7 @@
                         <thead>
                             <tr>
                                 <th data-sort="title">Job Title</th>
-                                <th data-sort="created_at">Creation Date ↕</th>
+                                <th data-sort="created_at">Date of creation ↕</th>
                                 <th data-sort="deadline">Deadline ↕</th>
                                 <th data-sort="budget">Budget</th>
                                 <th data-sort="category">Category</th>
@@ -126,15 +150,27 @@
                     <table id="reportsTable">
                         <thead>
                             <tr>
-                                <th data-sort="date">Date ↕</th>
-                                <th data-sort="reporter">Reporter</th>
-                                <th data-sort="reported">Reported User</th>
+                                <th data-sort="date">Date of creation ↕</th>
+                                <th data-sort="reporter">Reporter id</th>
+                                <th data-sort="reported">Reported User id</th>
                                 <th data-sort="type">Reason</th>
+                                <th data-sort="type">Message</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Populated by JavaScript -->
+                            {% for report in all_reports:%}
+                            <tr>
+                                <td>{{report.created_at}}</td>
+                                <td>{{report.sender_id}}</td>
+                                <td>{{report.reported_id}}</td>
+                                <td>{{report.reason}}</td>
+                                <td>{{report.message}}</td>
+                                <td><form action="" method="post">
+                                    <button class="btn btn-danger" >Delete</button>
+                                </form></td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

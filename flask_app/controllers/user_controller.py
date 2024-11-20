@@ -3,6 +3,7 @@ from flask_app.models.user_model import User
 from flask_app.models.freelancer_model import Freelancer
 from flask_app.models.recruiter_model import Recruiter
 from flask_app.models.job_model import Job
+from flask_app.models.report_model import Report
 from flask import render_template,session,redirect,flash,request
 from flask_bcrypt import Bcrypt # type: ignore
 bcrypt = Bcrypt(app)
@@ -152,11 +153,29 @@ def show_admin():
     }
     user = User.get_user_by_id(data)
     all_users=User.show_all()
-    all_freelancers=User.show_all_freelancers()
-    all_recruiters=User.show_all_recruiters()
+    all_freelancers=Freelancer.get_all_freelancers()
+    all_recruiters=Recruiter.get_all_recruiters()
     all_jobs=Job.show_all_jobs()
+    all_reports=Report.show_all_reports()
     if user.account_type == 3:
         print (all_users)
-        return render_template("admin_html.html",all_users=all_users,all_freelancers=all_freelancers,all_recruiters=all_recruiters,all_jobs=all_jobs)
+        return render_template("admin_html.html",all_users=all_users,all_freelancers=all_freelancers,all_recruiters=all_recruiters,all_jobs=all_jobs,all_reports=all_reports)
     return redirect("/home")
 
+@app.route("/admin/add_badges/<int:id>")
+def badges(id):
+    if "user_id" not in session:
+        return redirect('/login')
+    freelancer = Freelancer.get_by_id({"id":id})
+    return render_template("add_badges.html" ,freelancer=freelancer,id=id)
+
+
+
+@app.route("/admin/badge/<int:id>" ,methods=["POST"])
+def add_badge(id):
+    data = {
+            **request.form,
+            "id": id
+        }
+    User.add_badge(data)
+    return redirect("/admin")

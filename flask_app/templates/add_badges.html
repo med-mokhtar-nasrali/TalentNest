@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Freelancer Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_profile_freelancer.css') }}">
+</head>
+<body>
+    <section>
+        <div>
+            <img src="{{ url_for('static', filename='img/logo.png') }}">
+        </div>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="/admin/badge/{{id}}"method="post">
+                    <h2>Add Freelancer Badge</h2>
+                    <select name="badges">
+                        <option value="" disabled selected></option>
+                        <option value="badge1.png">badge1</option>
+                        <option value="badge2.png">badge2</option>
+                        <option value="badge3.png">badge3</option>
+                        <option value="badge3.png">badge3</option>
+                        <option value="badge4.png">badge4</option>
+                        <option value="badge5.png">badge5</option>
+                    </select>
+                    <button type="submit">Save Info</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -11,14 +11,14 @@
         <div class="formbold-form-wrapper">
             <h1>Report Form:</h1>
         <form action="/report/user" method="POST">
-    
+            <input type="hidden" name="reported_id" value="{{id}}">
             <div class="formbold-input-radio-wrapper">
                 <label for="jobtitle" class="formbold-form-label"> What is the report reason? </label>
     
                 <div class="formbold-radio-flex">
                     <div class="formbold-radio-group">
                     <label class="formbold-radio-label">
-                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        <input name="reason" class="formbold-input-radio" type="radio" value="Violation of Terms of Service">
                         Violation of Terms of Service
                         <span class="formbold-radio-checkmark"></span>
                     </label>
@@ -26,7 +26,7 @@
     
                     <div class="formbold-radio-group">
                     <label class="formbold-radio-label">
-                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        <input name="reason" class="formbold-input-radio" type="radio" value="Unresponsive Users" >
                         Unresponsive Users
                         <span class="formbold-radio-checkmark"></span>
                     </label>
@@ -34,7 +34,7 @@
     
                     <div class="formbold-radio-group">
                     <label class="formbold-radio-label">
-                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        <input name="reason" class="formbold-input-radio" type="radio" value="Inappropriate Content">
                         Inappropriate Content
                         <span class="formbold-radio-checkmark"></span>
                     </label>
@@ -42,7 +42,7 @@
     
                     <div class="formbold-radio-group">
                     <label class="formbold-radio-label">
-                        <input name="reason" class="formbold-input-radio" type="radio" >
+                        <input name="reason" class="formbold-input-radio" type="radio" value="Others" >
                         Others
                         <span class="formbold-radio-checkmark"></span>
                     </label>
@@ -51,6 +51,9 @@
             </div>
     
             <div>
+                {% for message in get_flashed_messages(category_filter=['message']) %}
+                            <p style=" color: red;"> {{ message }} </p>
+                {% endfor %}
                 <label for="message" class="formbold-form-label"> Message </label>
                 <textarea
                     rows="6"
@@ -61,7 +64,7 @@
                 ></textarea>
             </div>
     
-            <button class="formbold-btn">
+            <button type="submit" class="formbold-btn">
                 Send Report
             </button>
         </form>

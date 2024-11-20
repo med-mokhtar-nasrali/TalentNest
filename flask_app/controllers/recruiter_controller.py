@@ -22,3 +22,13 @@ def update_recruiter(id):
         Recruiter.update(data)
         return redirect("/home")
     return redirect(f'/recruiter/edit/{id}')
+
+
+#Display Route for the recruiter Profile
+@app.route("/recruiter/profile")
+def recruiter_profile():
+    if "user_id"not in session:
+        return redirect('/login')
+    return render_template("recruiter_profile.html")
+
+

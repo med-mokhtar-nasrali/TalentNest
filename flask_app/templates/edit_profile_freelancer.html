@@ -44,14 +44,14 @@
                         {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="education" rows="3" ></textarea>
+                        <textarea name="education" rows="3" >{{freelancer.education}}</textarea>
                         <label for="">Education*</label>
                         {% for message in get_flashed_messages(category_filter=['education']) %}
                         <p style=" color: red;">{{message}}</p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <input type="text" name="github">
+                        <input type="text" name="github" value="{{freelancer.github}}">
                         <label for="">GitHub*</label>
                         {% for message in get_flashed_messages(category_filter=['github']) %}
                         <p style=" color: red;">{{message}}</p>

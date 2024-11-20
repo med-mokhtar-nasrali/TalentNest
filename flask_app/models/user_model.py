@@ -97,13 +97,22 @@ class User:
     @classmethod
     def delete_user(cls,data):
         query=  """ 
-                SET foreign_key_checks = 0;
+                SET FOREIGN_KEY_CHECKS = 0;
+                DELETE FROM freelancers WHERE user_id=%(id)s ;
                 DELETE FROM users WHERE users.id=%(id)s;
-                SET foreign_key_checks = 1;
+                SET FOREIGN_KEY_CHECKS = 1;
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         return result
 
+    @classmethod
+    def add_badge(cls,data):
+        query="""
+            UPDATE freelancers SET 
+            badges = %(badges)s
+            WHERE freelancers.id = %(id)s
+            """
+        return connectToMySQL( DB ).query_db(query,data)
 
 #this is the validation method for the registration 
 
