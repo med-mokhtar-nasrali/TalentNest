@@ -65,3 +65,9 @@ body{
 
     justify-content: space-around;
 }
+.report{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}

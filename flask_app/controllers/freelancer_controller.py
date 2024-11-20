@@ -24,3 +24,15 @@ def update(id):
         Freelancer.update(data)
         return redirect("/home")
     return redirect(f'/freelancer/edit/{id}')
+
+
+#Display Route for the freelancer Profile
+@app.route("/freelancer/profile")
+def freelancer_profile():
+    if "user_id"not in session:
+        return redirect('/login')
+    freelancer = Freelancer.get_all_freelancers_profile({"user_id":session["user_id"]})
+    logged_user = User.get_user_by_id({"id":session["user_id"]})
+    print(logged_user)
+    print(freelancer)
+    return render_template("freelancer_profile.html",user=logged_user,freelancer=freelancer)

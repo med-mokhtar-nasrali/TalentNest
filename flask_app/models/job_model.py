@@ -19,6 +19,7 @@ class Job:
         self.updated_at = data["updated_at"]
         self.recruiter_id = data["recruiter_id"]
         self.applied_freelancers=Job.get_applied_freelancers({'job_id':self.id})
+        
     
     @classmethod
     def get_applied_freelancers(cls,data):
@@ -93,6 +94,17 @@ class Job:
             return all_jobs
         else:
             return False
+        
+    
+    @classmethod
+    def get_one(cls,data):
+        query="""
+                SELECT * FROM jobs  JOIN recruiters ON jobs.recruiter_id = recruiters.id
+                WHERE jobs.id = %(id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        job = cls(result[0])
+        return job
 
 
     @staticmethod

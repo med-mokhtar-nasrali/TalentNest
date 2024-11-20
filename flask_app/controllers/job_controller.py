@@ -1,5 +1,6 @@
 from flask_app import app
 from flask_app.models.job_model import Job
+from flask_app.models.user_model import User
 from flask import render_template,session,redirect,request
 
 #this is the display route for the job creation form 
@@ -36,8 +37,12 @@ def show_all_jobs():
     print('*'*30)
     all_jobs=Job.show_all_jobs()
     print(all_jobs)
-    
-    return render_template('job_offers.html',all_jobs=all_jobs)
+    data = {
+        **request.form,
+        'id':session['user_id'],
+    }
+    user = User.get_user_by_id(data)
+    return render_template('job_offers.html',all_jobs=all_jobs ,user=user)
 
 #applying to a job route
 @app.route('/apply/<int:job_id>',methods=["post"])
@@ -69,7 +74,12 @@ def search():
 
 
 
-
+@app.route("/job/<int:id>")
+def show_one(id):
+    if "user_id"not in session:
+        return redirect('/login')
+    job = Job.get_one({"id":id})
+    return render_template("show_job.html",job = job)
 
 
 
