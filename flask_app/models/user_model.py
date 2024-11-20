@@ -97,7 +97,9 @@ class User:
     @classmethod
     def delete_user(cls,data):
         query=  """ 
+                SET foreign_key_checks = 0;
                 DELETE FROM users WHERE users.id=%(id)s;
+                SET foreign_key_checks = 1;
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         return result

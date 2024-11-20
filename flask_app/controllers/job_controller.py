@@ -1,5 +1,6 @@
 from flask_app import app
 from flask_app.models.job_model import Job
+from flask_app.models import recruiter_model
 from flask import render_template,session,redirect,request
 
 #this is the display route for the job creation form 
@@ -35,7 +36,9 @@ def add_job():
 def show_all_jobs():
     print('*'*30)
     all_jobs=Job.show_all_jobs()
-    print(all_jobs)
+    # print(all_jobs)
+
+
     
     return render_template('job_offers.html',all_jobs=all_jobs)
 
@@ -44,6 +47,11 @@ def show_all_jobs():
 def apply(job_id):
     Job.apply({'job_id':job_id,'freelancer_id':session['freelancer_id']})
     return redirect('/job_offers')
+
+@app.route('/deny_app/<int:job_id>/<int:freelancer_id>', methods=["post"])
+def deny_app(job_id,freelancer_id):
+    Job.deny_app({'job_id':job_id,'freelancer_id':freelancer_id})
+    return redirect (f'/applications/{session['recruiter_id']}')
 
 
 #delete job route in admin page 
@@ -66,6 +74,16 @@ def show_all_by_category(category):
 def search():
     s = request.form["search"]
     return redirect(f"/job_offers/{s}")
+
+
+
+@app.route('/applications/<recruiter_id>')
+def show_applications(recruiter_id):
+    recruiter=recruiter_model.Recruiter.get_by_id({'id':recruiter_id})
+    print(recruiter.list_of_jobs)
+    return render_template ('applications.html',recruiter=recruiter)
+
+
 
 
 
