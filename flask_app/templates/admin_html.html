@@ -78,6 +78,7 @@
                                 <th data-sort="name">Name ↕</th>
                                 <th data-sort="date">Date of creation ↕</th>
                                 <th data-sort="rating">Rating ↕</th>
+                                <th>Badge</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -87,6 +88,7 @@
                             <td>{{freelancer.posted_by.first_name}} {{freelancer.posted_by.last_name}}</td>
                             <td>{{freelancer.created_at}}</td>
                             <td></td>
+                            <td><img src="{{ url_for('static', filename='img/'+freelancer.badges) }}"></td>
                             <td class="d-flex">
                                 <form action="/delete/{{freelancer.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form>
                             <form action="/admin/add_badges/{{freelancer.id}}"><button class="btn btn-primary" >Add Badge</button></form></td>

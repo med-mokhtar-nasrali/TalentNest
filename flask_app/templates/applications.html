@@ -43,7 +43,7 @@
                 <p> {{app['skills']}} </p>
                 <p>{{app['stars']}}</p>
                 <div class="request" >
-                    <form action="" method="post">
+                    <form action="/accept_app/{{app['jobs.id']}}/{{app['freelancers.id']}}" method="post">
                         <button class="btn btn-primary" >Hire</button>
                     </form>
                     <form action="/deny_app/{{app['jobs.id']}}/{{app['freelancers.id']}}" method="post">

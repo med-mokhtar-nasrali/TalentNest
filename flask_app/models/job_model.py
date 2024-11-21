@@ -57,6 +57,13 @@ class Job:
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         return result
+    @classmethod
+    def accept_app(cls,data):
+        query=  """ 
+                update applications set status='Accepted' where applications.job_id=%(job_id)s and applications.freelancer_id=%(freelancer_id)s ;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result
     
 
     @classmethod

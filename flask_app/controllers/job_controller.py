@@ -57,6 +57,13 @@ def deny_app(job_id,freelancer_id):
     return redirect (f'/applications/{session['recruiter_id']}')
 
 
+@app.route('/accept_app/<int:job_id>/<int:freelancer_id>', methods=["post"])
+def accept_app(job_id,freelancer_id):
+    Job.accept_app({'job_id':job_id,'freelancer_id':freelancer_id})
+    return redirect ('/payment')
+
+
+
 #delete job route in admin page 
 @app.route('/delete_job/<int:id>', methods=["post"])
 def delete_job(id):
