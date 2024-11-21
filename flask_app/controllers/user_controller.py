@@ -186,7 +186,7 @@ def review(id):
 def submit_review():
     data = {
         **request.form,
-        'recruiter_id':session['user_id']
+        'recruiter_id':session['recruiter_id']
     }
     Recruiter.give_rating(data)
     return redirect("/home")

@@ -87,9 +87,9 @@ def search():
 
 
 
-@app.route('/applications/<recruiter_id>')
-def show_applications(recruiter_id):
-    recruiter=recruiter_model.Recruiter.get_by_id({'id':recruiter_id})
+@app.route('/applications')
+def show_applications():
+    recruiter=recruiter_model.Recruiter.get_by_id({'id':session["recruiter_id"]})
     print(recruiter.list_of_jobs)
     return render_template ('applications.html',recruiter=recruiter)
 

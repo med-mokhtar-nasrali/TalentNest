@@ -82,7 +82,7 @@
                                 <th data-sort="date">Date of creation ↕</th>
                                 <th data-sort="rating">Rating ↕</th>
                                 <th>Badge</th>
-                                <th>Actions</th>
+                                <th>Add Badges</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,11 +90,13 @@
                             <tr>
                             <td>{{freelancer.posted_by.first_name}} {{freelancer.posted_by.last_name}}</td>
                             <td>{{freelancer.created_at}}</td>
-                            <td></td>
+                            {% if freelancer.rating["rating"] == None %}
+                                <td>0</td>
+                            {% else %}
+                            <td>{{ freelancer.rating["rating"] }}</td>
+                            {% endif %}
                             <td><img src="{{ url_for('static', filename='img/'+freelancer.badges) }}"></td>
-                            <td class="d-flex">
-                                <form action="/delete/{{freelancer.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form>
-                            <form action="/admin/add_badges/{{freelancer.id}}"><button class="btn btn-primary" >Add Badge</button></form></td>
+                            <td> <form action="/admin/add_badges/{{freelancer.id}}"><button class="btn btn-primary" >Edit Badge</button></form></td>
                             </tr>
                             {% endfor %}
                         </tbody>

@@ -84,7 +84,7 @@ class Recruiter:
     def give_rating(cls,data):
         query="""
                 INSERT INTO reviews (recruiter_id,freelancer_id,stars,content)
-                VALUES (%(recruiter_id)s,%(freelancer_id)s,%(stars)s,%(contents)s)
+                VALUES (%(recruiter_id)s,%(freelancer_id)s,%(stars)s,%(content)s)
                 """
         result = connectToMySQL( DB ).query_db(query,data)
         return result

@@ -132,6 +132,18 @@
                       <img src="{{ url_for('static', filename='img/'+freelancer.badges) }}">
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Rating</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if freelancer.rating["rating"] == None %}
+                                0
+                            {% else %}
+                            {{ freelancer.rating["rating"] }}
+                            {% endif %}
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>

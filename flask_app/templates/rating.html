@@ -10,6 +10,7 @@
 </head>
     <form action="/submit/review" method="post">
         <div class="rating-stars">
+            <input type="hidden" name="freelancer_id" value="{{id}}">
             <input type="radio" name="stars" id="rs0" value="0" checked><label for="rs0"></label>
             <input type="radio" name="stars" id="rs1" value="1"><label for="rs1"></label>
             <input type="radio" name="stars" id="rs2" value="2"><label for="rs2"></label>

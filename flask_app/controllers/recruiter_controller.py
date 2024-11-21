@@ -37,7 +37,12 @@ def recruiter_profile():
     logged_user = User.get_user_by_id({"id":session["user_id"]})
     return render_template("recruiter_profile.html", user=logged_user , recruiter=recruiter)
 
-
+@app.route("/hired/freelancers")
+def show_hired():
+    if "user_id"not in session:
+        return redirect('/login')
+    recruiter=Recruiter.get_by_id({'id':session["recruiter_id"]})
+    return render_template("hired_freelancers.html",recruiter=recruiter)
 
 
 @app.route('/payment', methods=['GET'])
@@ -62,8 +67,8 @@ def create_checkout_session():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url=request.host_url + 'success',
-            cancel_url=request.host_url + 'cancel',
+            success_url=request.host_url + 'home',
+            cancel_url=request.host_url + 'home',
         )
         return jsonify({'id': session.id})
     except Exception as e:
