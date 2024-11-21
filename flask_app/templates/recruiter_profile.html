@@ -27,9 +27,7 @@
   </nav>
 <div class="container">
     <div class="main-body">
-    
       <div >
-    
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -37,13 +35,20 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>Your Name</h4>
-                      <p class="text-secondary mb-1">Company Name:</p>
-                      <!-- <button class="btn btn-outline-primary">Message</button> -->
+                      <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                      <p class="text-secondary mb-1">Company Name: {{recruiter.company_name}}</p>
                       <hr>
                       <div class="row">
                         <div class="col-sm-12">
-                          <a class="btn btn-info "  href="#">Edit</a>
+                          {%if user.account_type == 0%}
+                          <form action="/recruiter/edit/{{recruiter.id}}">
+                            <button type="submit" class="btn btn-info">Edit</button></form>
+                          {% endif %}
+                          {%if user.account_type == 3%}
+                          <form action="/admin/add_badges/{{recruiter.id}}" method="post">
+                            <button type="submit" class="btn btn-info">Add Badge</button></form>
+                          {% endif %}
+                          
                         </div>
                       </div>
                     </div>
@@ -59,7 +64,7 @@
                       <h6 class="mb-0">About Me</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <p>About Me</p>
+                      <p> {{recruiter.about_me}} </p>
                     </div>
                   </div>
                   <hr>
@@ -68,7 +73,7 @@
                       <h6 class="mb-0">First Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <p>Your Name</p>
+                      <p>{{user.first_name}}</p>
                     </div>
                   </div>
                   <hr>
@@ -77,7 +82,7 @@
                       <h6 class="mb-0">Last Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <p>Your Name</p>
+                      <p>{{user.last_name}}</p>
                     </div>
                   </div>
                   <hr>
@@ -86,7 +91,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <p>Email</p>
+                      <p>{{user.email}}</p>
                     </div>
                   </div>
                   <hr>
@@ -95,19 +100,9 @@
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <p>Phone Number</p>
+                      <p>{{recruiter.phone}}</p>
                     </div>
                   </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Badges</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <img src="#" alt="">
-                    </div>
-                  </div>
-
                 </div>
               </div>
           </div>

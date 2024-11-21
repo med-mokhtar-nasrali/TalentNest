@@ -16,14 +16,14 @@ def edit(id):
 #Action Route for the edit page
 @app.route("/freelancer/update/<int:id>",methods=["POST"])
 def update(id):
-    if Freelancer.validate(request.form):
+    # if Freelancer.validate(request.form):
         data = {
             **request.form,
             "id":id
         }
         Freelancer.update(data)
         return redirect("/home")
-    return redirect(f'/freelancer/edit/{id}')
+    # return redirect(f'/freelancer/edit/{id}')
 
 
 #Display Route for the freelancer Profile

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/rating.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+    <form action="/submit/review" method="post">
+        <div class="rating-stars">
+            <input type="radio" name="stars" id="rs0" value="0" checked><label for="rs0"></label>
+            <input type="radio" name="stars" id="rs1" value="1"><label for="rs1"></label>
+            <input type="radio" name="stars" id="rs2" value="2"><label for="rs2"></label>
+            <input type="radio" name="stars" id="rs3" value="3"><label for="rs3"></label>
+            <input type="radio" name="stars" id="rs4" value="4"><label for="rs4"></label>
+            <input type="radio" name="stars" id="rs5" value="5"><label for="rs5"></label>
+            <span class="rating-counter"></span>
+        </div>
+        <div class="d-flex flex-column">
+            <textarea class="form-control mt-3 placeholder col-12 bg-primary text-white"  placeholder="Leave a comment here" name="content" rows="3"></textarea>
+            <button class="btn btn-success mt-3" type="submit">Submit</button>
+        </div>    
+    </form>    
+</body>
+</html>

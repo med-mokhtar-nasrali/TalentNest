@@ -16,21 +16,21 @@
                 <form action="/recruiter/update/{{recruiter.id}}" method="post">
                     <h2>Edit Recruiter Profile</h2>
                     <div class="inputbox">
-                        <input type="text" name="phone">
+                        <input type="text" name="phone" value="{{recruiter.phone}}">
                         <label for="">Phone*</label>
                         {% for message in get_flashed_messages(category_filter=['phone']) %}
                         <p style=" color: red;">{{message}}</p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <textarea name="about_me" rows="3" ></textarea>
+                        <textarea name="about_me" rows="3" >{{recruiter.about_me}}</textarea>
                         <label for="">About Me*</label>
                         {% for message in get_flashed_messages(category_filter=['about_me']) %}
                         <p style=" color: red;">{{message}}</p>
                         {% endfor %}
                     </div>
                     <div class="inputbox">
-                        <input type="text" name="company_name">
+                        <input type="text" name="company_name" value="{{recruiter.company_name}}">
                         <label for="">Company Name</label>
                         {% for message in get_flashed_messages(category_filter=['company_name']) %}
                         <p style=" color: red;">{{message}}</p>

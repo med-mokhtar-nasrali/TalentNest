@@ -65,6 +65,23 @@ class Recruiter:
             all_recruiters.append(cls(row))
         return all_recruiters
 
+    @classmethod
+    def get_all_recruiters_profile(cls,data):
+        query = """
+                SELECT * FROM recruiters WHERE user_id=%(user_id)s;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result[0]
+
+    @classmethod
+    def give_rating(cls,data):
+        query="""
+                INSERT INTO reviews (recruiter_id,freelancer_id,stars,content)
+                VALUES (%(recruiter_id)s,%(freelancer_id)s,%(stars)s,%(contents)s)
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result
+
 
     @staticmethod
     def validate(data):

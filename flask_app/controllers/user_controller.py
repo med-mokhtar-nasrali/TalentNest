@@ -170,6 +170,28 @@ def badges(id):
     return render_template("add_badges.html" ,freelancer=freelancer,id=id)
 
 
+@app.route("/faq")
+def faq():
+    return render_template("faq.html")
+
+
+@app.route("/review/<int:id>")
+def review(id):
+    if "user_id" not in session:
+        return redirect('/login')
+    return render_template("rating.html",id=id)
+
+
+@app.route("/submit/review",methods=["POST"])
+def submit_review():
+    data = {
+        **request.form,
+        'recruiter_id':session['user_id']
+    }
+    Recruiter.give_rating(data)
+    return redirect("/home")
+
+
 
 @app.route("/admin/badge/<int:id>" ,methods=["POST"])
 def add_badge(id):

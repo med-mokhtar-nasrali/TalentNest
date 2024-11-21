@@ -18,6 +18,7 @@ class Freelancer:
         self.updated_at = data["updated_at"]
         self.user_id = data["user_id"]
         self.posted_by = user_model.User.get_user_by_id({'id':self.user_id})
+        # self.rating=Freelancer.get_rating({id:self.id})
 
 # this method is to insert freelancer additionl info into its table
     @classmethod
@@ -83,6 +84,15 @@ class Freelancer:
         result = connectToMySQL( DB ).query_db(query,data)
         return result[0]
     
+
+    def get_rating(cls,data):
+        query="""
+            SELECT sum(stars) as rating
+            FROM reviews 
+            WHERE freelancer_id=%(id)s;
+            """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result[0]
 
     @staticmethod
     def validate(data):
