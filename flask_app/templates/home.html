@@ -56,8 +56,6 @@
             <ul>
                 <li class="nav-item btn "  ><h6><a href="/home">Home</a></h6></li>
                 <li class="nav-item btn "  ><h6><a href="/faq">FAQ</a></h6></li>
-                <li class="nav-item btn"><h6><a href="">Top Talents</a></h6></li>
-                <li class="nav-item btn"><h6><a href="">Top Recruiters</a></h6></li>
                 <li class="nav-item btn"><h6><a href="/job_offers">Job Offers</a></h6></li>
                 {%if user.account_type == 1%}
                 <li class="scroll"><a style="padding-top: 5px;" href="/freelancer/profile">My Profile</a></li>
@@ -69,7 +67,7 @@
                     <li class="scroll"><a style="color: Red; padding-top: 5px;" href="/admin">Admin</a></li>
                 {% endif %}
                 <li ><form action="/logout" method="post">
-                    <button class="btn btn-danger logout"><h6>Log Out</h6></button>
+                    <button class="btn btn-danger logout"><h6 style="color: white;">Log Out</h6></button>
                 </form></li>
             </ul>
         </div>

@@ -21,8 +21,6 @@
                 <li><a class="btn btn-primary" href="/job_form">Create Job</a></li>
                 {% endif %}
                 <li class="nav-item btn "  ><h6><a href="/home">Home</a></h6></li>
-                <li class="nav-item btn"><h6><a href="">Top Talents</a></h6></li>
-                <li class="nav-item btn"><h6><a href="">Top Recruiters</a></h6></li>
                 <li class="nav-item btn"><h6><a href="/job_offers">Job Offers</a></h6></li>
                 <li class="nav-item btn"><h6><a href="/hired/freelancers">Hired</a></h6></li>
                 <li ><form action="/logout" method="post">
@@ -41,7 +39,11 @@
                 <p>{{app['first_name'] }} {{ app['last_name']}}</p>
                 <p>{{app['title']}}</p>
                 <p> {{app['skills']}} </p>
-                <p>{{app['stars']}}</p>
+                {% if app['stars']== None %}
+                     <p>0</p>   
+                            {% else %}
+                     <p>{{ app['stars']}} </p>      
+                {% endif %}
                 <div class="request" >
                     <form action="/accept_app/{{app['jobs.id']}}/{{app['freelancers.id']}}" method="post">
                         <button class="btn btn-primary" >Hire</button>

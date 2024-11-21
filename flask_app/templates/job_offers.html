@@ -21,8 +21,6 @@
                 <li><a class="btn btn-primary" href="/job_form">Create Job</a></li>
                 {% endif %}
                 <li class="nav-item btn "  ><h6><a href="/home">Home</a></h6></li>
-                <li class="nav-item btn"><h6><a href="">Top Talents</a></h6></li>
-                <li class="nav-item btn"><h6><a href="">Top Recruiters</a></h6></li>
                 {%if user.account_type == 0%}
                 <li class="nav-item btn"><h6><a href="/applications">Applications</a></h6></li>
                 {% endif %}
@@ -41,7 +39,7 @@
             <div class="offer">
                 <p>{{jobs.category}}</p>
                 <p>{{jobs.title}}</p>
-                <p>recruiter name</p>
+                <p>{{user.first_name}} {{user.last_name}}</p>
                 <p>{{jobs.required_tech}}</p>
                 <p>{{jobs.budget}}</p>
                 <div class="report">
