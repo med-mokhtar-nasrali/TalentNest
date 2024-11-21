@@ -355,3 +355,22 @@ body {
     background-size:cover; */
     background-color: rgb(0, 52, 75);
 }
+.paybody{
+    position: relative;
+    background:url('../img/mainbg.jpg')no-repeat;
+    background-position:center;
+    background-size:cover;
+    text-align: center;
+    height:100%;
+    z-index: 1;
+}
+.pay{
+    
+    margin: 0 auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 300px;
+    gap: 70px;
+}

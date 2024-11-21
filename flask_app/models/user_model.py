@@ -60,6 +60,9 @@ class User:
     def get_user_by_id(cls,data):
         query="select * from users where users.id=%(id)s;"
         result=connectToMySQL( DB ).query_db(query,data)
+        if not result:
+            print(f"No user found with ID: {data['id']}")
+            return None
         return cls(result[0])
     
 

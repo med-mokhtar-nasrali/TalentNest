@@ -2,8 +2,8 @@ from flask_app.config.myconnection import connectToMySQL
 from flask_app import DB
 from flask import flash
 from flask_app.models.user_model import User
-from flask_app.models.recruiter_model import Recruiter
-from flask_app.models.freelancer_model import Freelancer
+from flask_app.models import recruiter_model
+from flask_app.models import freelancer_model
 
 
 class Job:
@@ -21,6 +21,51 @@ class Job:
         self.applied_freelancers=Job.get_applied_freelancers({'job_id':self.id})
         
     
+
+    @classmethod
+    def get_jobs_by_rectruter_id(cls,data):
+        query="""  select * from recruiters
+                    join jobs on jobs.recruiter_id= recruiters.id
+                    join applications on jobs.id=applications.job_id 
+                    join freelancers on applications.freelancer_id= freelancers.id
+                    join users on freelancers.user_id=users.id
+                    left join reviews on freelancers.user_id=reviews.freelancer_id
+                    where jobs.recruiter_id=%(recruiter_id)s ;
+                    """
+        results=connectToMySQL(DB).query_db(query,data)
+        # recruiter= recruiter_model.Recruiter(results[0])
+        # job_list=[]
+        # freelancers=[]
+        # applications_list=[]
+        # for row in results:
+        #     job_data={
+        #         **row,
+        #         "id": row["jobs.id"],
+        #         "created_at": row["jobs.created_at"],
+        #         "updated_at": row["jobs.updated_at"]
+        #     }
+        #     job_list.append(cls(job_data))
+
+        #     applications_list.append(row["recruiter_id"])
+
+        # print (applications_list)
+        return results
+    @classmethod
+    def deny_app(cls,data):
+        query=  """ 
+                update applications set status='Denied' where applications.job_id=%(job_id)s and applications.freelancer_id=%(freelancer_id)s ;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result
+    @classmethod
+    def accept_app(cls,data):
+        query=  """ 
+                update applications set status='Accepted' where applications.job_id=%(job_id)s and applications.freelancer_id=%(freelancer_id)s ;
+                """
+        result = connectToMySQL( DB ).query_db(query,data)
+        return result
+    
+
     @classmethod
     def get_applied_freelancers(cls,data):
         query="select * from applications where job_id=%(job_id)s ; "

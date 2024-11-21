@@ -1,7 +1,8 @@
 from flask_app.config.myconnection import connectToMySQL
 from flask_app import DB
-from flask import flash
+from flask import flash,session
 from flask_app.models import user_model
+from flask_app.models import job_model
 
 
 
@@ -15,8 +16,14 @@ class Recruiter:
         self.updated_at = data["updated_at"]
         self.user_id = data["user_id"]
         self.posted_by = user_model.User.get_user_by_id({'id':self.user_id})
+        self.list_of_jobs=job_model.Job.get_jobs_by_rectruter_id({'recruiter_id':self.id})
+
+
+
 
 #this method is to insert recuiter addional info into its table 
+    
+    
     @classmethod
     def add_recruiter_info(cls,data):
         query="insert into recruiters (phone, about_me, company_name, user_id) values (%(phone)s, %(about_me)s, %(company_name)s,%(user_id)s);"  

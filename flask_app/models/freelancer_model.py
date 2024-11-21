@@ -23,7 +23,7 @@ class Freelancer:
 # this method is to insert freelancer additionl info into its table
     @classmethod
     def add_freelancer_info(cls,data):
-        query="insert into freelancers (phone, about_me, experience, skills, education, github, user_id) values (%(phone)s, %(about_me)s, %(experience)s, %(skills)s, %(education)s, %(github)s,%(user_id)s);"    
+        query="insert into freelancers (phone, about_me, experience, skills, education, github, user_id,badges) values (%(phone)s, %(about_me)s, %(experience)s, %(skills)s, %(education)s, %(github)s,%(user_id)s,'badge1.png');"    
         return connectToMySQL( DB ).query_db(query,data)
     
     @classmethod
