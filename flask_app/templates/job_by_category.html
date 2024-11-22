@@ -37,10 +37,16 @@
             <div class="offer">
                 <p>{{jobs.category}}</p>
                 <p>{{jobs.title}}</p>
-                <p>recruiter name</p>
                 <p>{{jobs.required_tech}}</p>
                 <p>{{jobs.budget}}</p>
-                <button class="btn btn-primary btn-sm">Apply now</button>
+                <div class="d-flex gap-2">
+                <form action="/job/{{jobs.id}}">
+                    <button type="submit" class="btn btn-primary btn-sm">View</button>
+                </form>
+                <form action="/user/report/{{jobs.id}}">
+                    <button type="submit" class="btn btn-danger btn-sm"><ion-icon name="warning-outline"></ion-icon>Report</button>
+                </form>
+            </div>
             </div>
             {% endfor %}
             {% else %}

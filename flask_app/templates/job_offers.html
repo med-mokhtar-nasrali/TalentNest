@@ -17,10 +17,11 @@
         </div>
         <div class="d-flex">
             <ul>
-                {%if "recruiter_id" in session%}
-                <li><a class="btn btn-primary" href="/job_form">Create Job</a></li>
-                {% endif %}
                 <li class="nav-item btn "  ><h6><a href="/home">Home</a></h6></li>
+                {%if "recruiter_id" in session%}
+                <li class="nav-item btn"><h6><a  href="/job_form">Create Job</a></h6></li>
+                {% endif %}
+                
                 {%if user.account_type == 0%}
                 <li class="nav-item btn"><h6><a href="/applications">Applications</a></h6></li>
                 {% endif %}
@@ -37,20 +38,22 @@
             {% for jobs in all_jobs %}
             {% if session['freelancer_id'] not in jobs.applied_freelancers %}
             <div class="offer">
-                <p>{{jobs.category}}</p>
-                <p>{{jobs.title}}</p>
-                <p>{{user.first_name}} {{user.last_name}}</p>
-                <p>{{jobs.required_tech}}</p>
-                <p>{{jobs.budget}}</p>
+                <p>Title : {{jobs.title}}</p>
+                <p>Category: {{jobs.category}}</p>
+                <p>Name: {{user.first_name}} {{user.last_name}}</p>
+                <p>Tech: {{jobs.required_tech}}</p>
+                <p>Budget: {{jobs.budget}}</p>
                 <div class="report">
                     {%if user.account_type == 1%}
                         <form action="/job/{{jobs.id}}">
                             <button type="submit" class="btn btn-primary btn-sm">View</button>
                         </form>
                     {%endif%}
+                    {%if session['recruiter_id'] != jobs.recruiter_id%}
                     <form action="/user/report/{{jobs.id}}">
                         <button type="submit" class="btn btn-danger btn-sm"><ion-icon name="warning-outline"></ion-icon>Report</button>
                     </form>
+                    {%endif%}
                 </div>    
             </div>
             {% endif %}

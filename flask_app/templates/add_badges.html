@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Freelancer Profile</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_profile_freelancer.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/job_offer.css') }}">
 </head>
 <body>
     <section>
@@ -15,15 +16,16 @@
             <div class="form-value">
                 <form action="/admin/badge/{{id}}"method="post">
                     <h2>Add Freelancer Badge</h2>
+                    <div class="category">
                     <select name="badges">
-                        <option value="" disabled selected></option>
-                        <option value="badge1.png">badge1</option>
-                        <option value="badge2.png">badge2</option>
-                        <option value="badge3.png">badge3</option>
-                        <option value="badge3.png">badge3</option>
-                        <option value="badge4.png">badge4</option>
-                        <option value="badge5.png">badge5</option>
+                        <option value="" disabled selected>Choose badge</option>
+                        <option value="badge2.png">Junior</option>
+                        <option value="badge3.png">Confirmed</option>
+                        <option value="badge3.png">Senior</option>
+                        <option value="badge4.png">Manager</option>
+                        <option value="badge5.png">Pro</option>
                     </select>
+                    </div>
                     <button type="submit">Save Info</button>
                 </form>
             </div>

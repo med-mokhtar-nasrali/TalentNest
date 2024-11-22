@@ -27,11 +27,6 @@
             <section class="users-section">
                 <div class="section-header">
                     <h2>Recruiters List</h2>
-                    <div class="filters">
-                        <form action="/search_user"></form>
-                        <input type="text" name="search_users" id="reportSearch" placeholder="Search users..." class="search-input">  
-                        <button type="submit" class="search_user btn"><ion-icon  name="search-outline"></ion-icon></button>
-                    </div>
                 </div>
                 <div class="table-container">
                     <table id="usersTable">
@@ -39,7 +34,6 @@
                             <tr>
                                 <th data-sort="name">Recruiter Name ↕</th>
                                 <th data-sort="date">Date of creation ↕</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,9 +41,6 @@
                             <tr>
                             <td>{{users.posted_by.first_name}} {{users.posted_by.last_name}}</td>
                             <td>{{users.created_at}}</td>
-                            <td>
-                                <form action="/delete/{{users.id}}" method="post"><button class="btn btn-danger" >DELETE</button></form></td>
-                        </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -58,11 +49,6 @@
             <section class="users-section">
                 <div class="section-header">
                     <h2>Freelancers List</h2>
-                    <div class="filters">
-                        <form action="/search_user"></form>
-                        <input type="text" name="search_users" id="reportSearch" placeholder="Search users..." class="search-input">  
-                        <button type="submit" class="search_user btn"><ion-icon  name="search-outline"></ion-icon></button>
-                    </div>
                 </div>
                 <div class="table-container">
                     <table id="usersTable">
@@ -96,11 +82,6 @@
             <section class="reports-section">
                 <div class="section-header">
                     <h2>Job Offers</h2>
-                    <div class="filters">
-                        <form action="/search_offers"></form>
-                        <input type="text" name="search_offers" id="reportSearch" placeholder="Search offers..." class="search-input">
-                        <button type="submit" class="search_offers btn"><ion-icon  name="search-outline"></ion-icon></button>                    
-                    </div>
                 </div>
                 <div class="table-container">
                     <table id="reportsTable">
@@ -112,7 +93,6 @@
                                 <th data-sort="budget">Budget</th>
                                 <th data-sort="category">Category</th>
                                 <th data-sort="recruiter_id">Recruiter ID</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,9 +104,6 @@
                                 <td>{{job.budget}}</td>
                                 <td>{{job.category}}</td>
                                 <td>{{job.recruiter_id}}</td>
-                                <td><form action="/delete_job/{{job.id}}" method="post">
-                                    <button class="btn btn-danger" >Delete</button>
-                                </form></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -137,11 +114,6 @@
             <section class="reports-section">
                 <div class="section-header">
                     <h2>Reports</h2>
-                    <div class="filters">
-                        <form action="/search_reports"></form>
-                        <input type="text" name="search_reports" id="reportSearch" placeholder="Search reports..." class="search-input">
-                        <button type="submit" class="search_reports btn"><ion-icon  name="search-outline"></ion-icon></button>                   
-                    </div>
                 </div>
                 <div class="table-container">
                     <table id="reportsTable">
@@ -152,7 +124,6 @@
                                 <th data-sort="reported">Reported User id</th>
                                 <th data-sort="type">Reason</th>
                                 <th data-sort="type">Message</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -163,8 +134,6 @@
                                 <td>{{report.reported_id}}</td>
                                 <td>{{report.reason}}</td>
                                 <td>{{report.message}}</td>
-                                <td><form action="" method="post">
-                                    <button class="btn btn-danger" >Delete</button>
                                 </form></td>
                             </tr>
                             {% endfor %}

@@ -36,13 +36,13 @@
             {% for app in recruiter.list_of_jobs %}
             {% if app['status']=='Pending' %}
             <div class="apllication">
-                <p>{{app['first_name'] }} {{ app['last_name']}}</p>
-                <p>{{app['title']}}</p>
-                <p> {{app['skills']}} </p>
+                <p>Name: {{app['first_name'] }} {{ app['last_name']}}</p>
+                <p>Job: {{app['title']}}</p>
+                <p>Skills: {{app['skills']}} </p>
                 {% if app['stars']== None %}
-                     <p>0</p>   
+                     <p>Rating: 0</p>   
                             {% else %}
-                     <p>{{ app['stars']}} </p>      
+                     <p>Rating: {{ app['stars']}} </p>      
                 {% endif %}
                 <div class="request" >
                     <form action="/accept_app/{{app['jobs.id']}}/{{app['freelancers.id']}}" method="post">
